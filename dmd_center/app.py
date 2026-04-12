@@ -4,9 +4,9 @@ import pickle
 
 st.set_page_config(page_title="DMD Clinical Space", layout="wide")
 
-# -------------------------------
-# LOAD MODELS (Replace later)
-# -------------------------------
+heart_adv_model = pickle.load(open("models/heart_advance_model_v1.pkl", "rb"))
+
+
 def fake_model(data):
     return np.random.choice([0, 1]), np.random.randint(60, 95)
 
@@ -164,32 +164,31 @@ slope_map = {
     # -------------------------------
     # PREDICTION
     # -------------------------------
-    if st.button("Predict (Advanced)", key="heart_adv_final"):
+    if st.button("Predict (Advanced)"):
 
-        # Convert inputs
-        input_data = [
-            age,
-            1 if sex == "Male" else 0,
-            cp_map[chest_pain],
-            resting_bp,
-            cholesterol,
-            fbs_map[fasting_bs],
-            ecg_map[resting_ecg],
-            max_hr,
-            angina_map[exercise_angina],
-            old_peak,
-            slope_map[st_slope]
-        ]
+    input_data = [[
+        age,
+        1 if sex == "Male" else 0,
+        cp_map[chest_pain],
+        resting_bp,
+        cholesterol,
+        fbs_map[fasting_bs],
+        ecg_map[resting_ecg],
+        max_hr,
+        angina_map[exercise_angina],
+        old_peak,
+        slope_map[st_slope]
+    ]]
 
-        # ⚠️ IMPORTANT: Encode categorical later if needed
+    pred = heart_adv_model.predict(input_data)[0]
+    prob = heart_adv_model.predict_proba(input_data)[0][1]
 
-        pred, prob = fake_model(input_data)
+    st.write("### Result")
 
-        st.write("### Result")
-        if pred == 1:
-            st.error(f"High Risk ⚠️ ({prob}%)")
-        else:
-            st.success(f"Low Risk ✅ ({prob}%)")
+    if pred == 1:
+        st.error(f"High Risk ⚠️ ({round(prob*100, 2)}%)")
+    else:
+        st.success(f"Low Risk ✅ ({round(prob*100, 2)}%)")
 
 # =========================================================
 # 💉 HYPERTENSION
