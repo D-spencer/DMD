@@ -120,46 +120,46 @@ slope_map = {
     "Downward (Abnormal)": "Down"
 }
     with advanced_tab:
-    st.write("### Advanced Heart Disease Assessment")
-
-    col1, col2 = st.columns(2)
-
-    with col1:
-        age = st.number_input("Age", min_value=1, max_value=120)
-        sex = st.selectbox("Gender", ["Male", "Female"])
-
-        chest_pain = st.selectbox(
-            "Chest Pain Type",
-            list(cp_map.keys())
-        )
-
-        resting_bp = st.number_input("Resting Blood Pressure (mmHg)")
-        cholesterol = st.number_input("Cholesterol Level")
-
-    with col2:
-        fasting_bs = st.selectbox(
-            "High Blood Sugar?",
-            list(fbs_map.keys())
-        )
-
-        resting_ecg = st.selectbox(
-            "Resting ECG Result",
-            list(ecg_map.keys())
-        )
-
-        max_hr = st.number_input("Maximum Heart Rate")
-
-        exercise_angina = st.selectbox(
-            "Chest Pain During Exercise?",
-            list(angina_map.keys())
-        )
-
-        old_peak = st.number_input("ST Depression (Old Peak)")
-
-        st_slope = st.selectbox(
-            "ST Segment Slope",
-            list(slope_map.keys())
-        )
+        st.write("### Advanced Heart Disease Assessment")
+    
+        col1, col2 = st.columns(2)
+    
+        with col1:
+            age = st.number_input("Age", min_value=1, max_value=120)
+            sex = st.selectbox("Gender", ["Male", "Female"])
+    
+            chest_pain = st.selectbox(
+                "Chest Pain Type",
+                list(cp_map.keys())
+            )
+    
+            resting_bp = st.number_input("Resting Blood Pressure (mmHg)")
+            cholesterol = st.number_input("Cholesterol Level")
+    
+        with col2:
+            fasting_bs = st.selectbox(
+                "High Blood Sugar?",
+                list(fbs_map.keys())
+            )
+    
+            resting_ecg = st.selectbox(
+                "Resting ECG Result",
+                list(ecg_map.keys())
+            )
+    
+            max_hr = st.number_input("Maximum Heart Rate")
+    
+            exercise_angina = st.selectbox(
+                "Chest Pain During Exercise?",
+                list(angina_map.keys())
+            )
+    
+            old_peak = st.number_input("ST Depression (Old Peak)")
+    
+            st_slope = st.selectbox(
+                "ST Segment Slope",
+                list(slope_map.keys())
+            )
 
     # -------------------------------
     # PREDICTION
