@@ -86,22 +86,110 @@ with tab2:
             st.success(f"Risk: {'High ⚠️' if pred else 'Low ✅'} ({prob}%)")
 
     # -------- ADVANCED --------
+    # Chest pain mapping
+cp_map = {
+    "Mild Chest Pain (Angina Type)": "ATA",
+    "Non-Anginal Pain": "NAP",
+    "No Chest Pain (Asymptomatic)": "ASY",
+    "Typical Angina": "TA"
+}
+
+# Fasting blood sugar
+fbs_map = {
+    "No (Normal)": 0,
+    "Yes (High Blood Sugar)": 1
+}
+
+# Resting ECG
+ecg_map = {
+    "Normal Heart Rhythm": "Normal",
+    "Heart Muscle Thickening": "LVH",
+    "Abnormal ST Segment": "ST"
+}
+
+# Exercise angina
+angina_map = {
+    "No": "N",
+    "Yes (Pain During Exercise)": "Y"
+}
+
+# ST slope
+slope_map = {
+    "Upward (Normal)": "Up",
+    "Flat (Risky)": "Flat",
+    "Downward (Abnormal)": "Down"
+}
     with advanced_tab:
-        col1, col2 = st.columns(2)
+    st.write("### Advanced Heart Disease Assessment")
 
-        with col1:
-            age = st.number_input("Age ", key="h_age_a")
-            cholesterol = st.number_input("Cholesterol ", key="h_chol")
-            max_hr = st.number_input("Max Heart Rate")
+    col1, col2 = st.columns(2)
 
-        with col2:
-            bp = st.number_input("Blood Pressure ", key="h_bp_a")
-            smoking = st.selectbox("Smoking", ["Yes", "No"])
-            exercise = st.selectbox("Exercise Level", ["Low", "Medium", "High"])
+    with col1:
+        age = st.number_input("Age", min_value=1, max_value=120)
+        sex = st.selectbox("Gender", ["Male", "Female"])
 
-        if st.button("Predict (Advanced)", key="h_adv"):
-            pred, prob = fake_model([age, cholesterol, max_hr, bp])
-            st.success(f"Risk: {'High ⚠️' if pred else 'Low ✅'} ({prob}%)")
+        chest_pain = st.selectbox(
+            "Chest Pain Type",
+            list(cp_map.keys())
+        )
+
+        resting_bp = st.number_input("Resting Blood Pressure (mmHg)")
+        cholesterol = st.number_input("Cholesterol Level")
+
+    with col2:
+        fasting_bs = st.selectbox(
+            "High Blood Sugar?",
+            list(fbs_map.keys())
+        )
+
+        resting_ecg = st.selectbox(
+            "Resting ECG Result",
+            list(ecg_map.keys())
+        )
+
+        max_hr = st.number_input("Maximum Heart Rate")
+
+        exercise_angina = st.selectbox(
+            "Chest Pain During Exercise?",
+            list(angina_map.keys())
+        )
+
+        old_peak = st.number_input("ST Depression (Old Peak)")
+
+        st_slope = st.selectbox(
+            "ST Segment Slope",
+            list(slope_map.keys())
+        )
+
+    # -------------------------------
+    # PREDICTION
+    # -------------------------------
+    if st.button("Predict (Advanced)", key="heart_adv_final"):
+
+        # Convert inputs
+        input_data = [
+            age,
+            1 if sex == "Male" else 0,
+            cp_map[chest_pain],
+            resting_bp,
+            cholesterol,
+            fbs_map[fasting_bs],
+            ecg_map[resting_ecg],
+            max_hr,
+            angina_map[exercise_angina],
+            old_peak,
+            slope_map[st_slope]
+        ]
+
+        # ⚠️ IMPORTANT: Encode categorical later if needed
+
+        pred, prob = fake_model(input_data)
+
+        st.write("### Result")
+        if pred == 1:
+            st.error(f"High Risk ⚠️ ({prob}%)")
+        else:
+            st.success(f"Low Risk ✅ ({prob}%)")
 
 # =========================================================
 # 💉 HYPERTENSION
