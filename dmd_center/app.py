@@ -2,126 +2,145 @@ import streamlit as st
 import numpy as np
 import pickle
 
-# -------------------------------
-# PAGE CONFIG
-# -------------------------------
 st.set_page_config(page_title="DMD Clinical Space", layout="wide")
 
 # -------------------------------
-# LOAD MODELS (Make sure you have these)
+# LOAD MODELS (Replace later)
 # -------------------------------
-# Replace with your actual model paths
-# diabetes_model = pickle.load(open("models/diabetes.pkl", "rb"))
-# heart_model = pickle.load(open("models/heart.pkl", "rb"))
-# bp_model = pickle.load(open("models/bp.pkl", "rb"))
-
-# TEMPORARY (for testing UI)
-def fake_model(input_data):
-    return np.random.choice([0, 1]), np.random.randint(50, 95)
+def fake_model(data):
+    return np.random.choice([0, 1]), np.random.randint(60, 95)
 
 # -------------------------------
 # HEADER
 # -------------------------------
-st.markdown(
-    "<h1 style='text-align: center;'>DMD Clinical Space</h1>",
-    unsafe_allow_html=True
-)
-st.markdown(
-    "<h4 style='text-align: center;'>Your Home To Go Diagnose System</h4>",
-    unsafe_allow_html=True
-)
+st.markdown("<h1 style='text-align:center;'>DMD Clinical Space</h1>", unsafe_allow_html=True)
+st.markdown("<h4 style='text-align:center;'>Your Home To Go Diagnose System</h4>", unsafe_allow_html=True)
 
 st.write("---")
 
 # -------------------------------
-# DISEASE SELECTION (TABS)
+# DISEASE TABS
 # -------------------------------
 tab1, tab2, tab3 = st.tabs(["🩸 Diabetes", "❤️ Heart Disease", "💉 Hypertension"])
 
-# -------------------------------
-# DIABETES TAB
-# -------------------------------
+# =========================================================
+# 🩸 DIABETES
+# =========================================================
 with tab1:
-    st.subheader("Diabetes Risk Assessment")
+    st.subheader("Diabetes Assessment")
 
-    col1, col2 = st.columns(2)
+    basic_tab, advanced_tab = st.tabs(["Basic", "Advanced"])
 
-    with col1:
-        age = st.number_input("Age", min_value=1, max_value=120)
-        glucose = st.number_input("Glucose Level")
-        bmi = st.number_input("BMI")
+    # -------- BASIC --------
+    with basic_tab:
+        st.write("### Basic Screening")
 
-    with col2:
-        bp = st.number_input("Blood Pressure")
-        activity = st.selectbox("Physical Activity", ["Low", "Medium", "High"])
-        gender = st.selectbox("Gender", ["Male", "Female"])
+        age = st.number_input("Age", key="d_age")
+        bmi = st.number_input("BMI", key="d_bmi")
+        glucose = st.number_input("Glucose Level", key="d_glucose")
 
-    if st.button("Predict Diabetes"):
-        # Replace fake_model with real model
-        pred, prob = fake_model([age, glucose, bmi, bp])
+        if st.button("Predict (Basic)", key="d_basic_btn"):
+            pred, prob = fake_model([age, bmi, glucose])
 
-        st.write("### Result")
-        if pred == 1:
-            st.error(f"High Risk ⚠️ ({prob}%)")
-        else:
-            st.success(f"Low Risk ✅ ({prob}%)")
+            st.write("### Result")
+            st.success(f"Risk: {'High ⚠️' if pred else 'Low ✅'} ({prob}%)")
 
-# -------------------------------
-# HEART DISEASE TAB
-# -------------------------------
+    # -------- ADVANCED --------
+    with advanced_tab:
+        st.write("### Advanced Assessment")
+
+        col1, col2 = st.columns(2)
+
+        with col1:
+            age_a = st.number_input("Age ", key="d_age_a")
+            bmi_a = st.number_input("BMI ", key="d_bmi_a")
+            glucose_a = st.number_input("Glucose ", key="d_glucose_a")
+
+        with col2:
+            bp_a = st.number_input("Blood Pressure", key="d_bp_a")
+            insulin = st.number_input("Insulin Level")
+            activity = st.selectbox("Physical Activity", ["Low", "Medium", "High"], key="d_act")
+
+        if st.button("Predict (Advanced)", key="d_adv_btn"):
+            pred, prob = fake_model([age_a, bmi_a, glucose_a, bp_a, insulin])
+
+            st.write("### Result")
+            st.success(f"Risk: {'High ⚠️' if pred else 'Low ✅'} ({prob}%)")
+
+# =========================================================
+# ❤️ HEART DISEASE
+# =========================================================
 with tab2:
     st.subheader("Heart Disease Assessment")
 
-    col1, col2 = st.columns(2)
+    basic_tab, advanced_tab = st.tabs(["Basic", "Advanced"])
 
-    with col1:
-        age_h = st.number_input("Age ", key="h_age")
+    # -------- BASIC --------
+    with basic_tab:
+        age = st.number_input("Age", key="h_age")
         cholesterol = st.number_input("Cholesterol")
-        max_hr = st.number_input("Max Heart Rate")
+        bp = st.number_input("Blood Pressure", key="h_bp")
 
-    with col2:
-        bp_h = st.number_input("Blood Pressure ", key="h_bp")
-        smoking = st.selectbox("Smoking", ["Yes", "No"])
-        exercise = st.selectbox("Exercise Level", ["Low", "Medium", "High"])
+        if st.button("Predict (Basic)", key="h_basic"):
+            pred, prob = fake_model([age, cholesterol, bp])
+            st.success(f"Risk: {'High ⚠️' if pred else 'Low ✅'} ({prob}%)")
 
-    if st.button("Predict Heart Disease"):
-        pred, prob = fake_model([age_h, cholesterol, max_hr, bp_h])
+    # -------- ADVANCED --------
+    with advanced_tab:
+        col1, col2 = st.columns(2)
 
-        st.write("### Result")
-        if pred == 1:
-            st.error(f"High Risk ⚠️ ({prob}%)")
-        else:
-            st.success(f"Low Risk ✅ ({prob}%)")
+        with col1:
+            age = st.number_input("Age ", key="h_age_a")
+            cholesterol = st.number_input("Cholesterol ", key="h_chol")
+            max_hr = st.number_input("Max Heart Rate")
 
-# -------------------------------
-# HYPERTENSION TAB
-# -------------------------------
+        with col2:
+            bp = st.number_input("Blood Pressure ", key="h_bp_a")
+            smoking = st.selectbox("Smoking", ["Yes", "No"])
+            exercise = st.selectbox("Exercise Level", ["Low", "Medium", "High"])
+
+        if st.button("Predict (Advanced)", key="h_adv"):
+            pred, prob = fake_model([age, cholesterol, max_hr, bp])
+            st.success(f"Risk: {'High ⚠️' if pred else 'Low ✅'} ({prob}%)")
+
+# =========================================================
+# 💉 HYPERTENSION
+# =========================================================
 with tab3:
     st.subheader("Hypertension Assessment")
 
-    col1, col2 = st.columns(2)
+    basic_tab, advanced_tab = st.tabs(["Basic", "Advanced"])
 
-    with col1:
-        age_b = st.number_input("Age  ", key="b_age")
-        weight = st.number_input("Weight (kg)")
-        height = st.number_input("Height (cm)")
-
-    with col2:
+    # -------- BASIC --------
+    with basic_tab:
+        age = st.number_input("Age", key="b_age")
         systolic = st.number_input("Systolic BP")
         diastolic = st.number_input("Diastolic BP")
-        salt = st.selectbox("Salt Intake", ["Low", "Medium", "High"])
 
-    if st.button("Predict Hypertension"):
-        pred, prob = fake_model([age_b, weight, height, systolic, diastolic])
+        if st.button("Predict (Basic)", key="b_basic"):
+            pred, prob = fake_model([age, systolic, diastolic])
+            st.success(f"Risk: {'High ⚠️' if pred else 'Low ✅'} ({prob}%)")
 
-        st.write("### Result")
-        if pred == 1:
-            st.error(f"High Risk ⚠️ ({prob}%)")
-        else:
-            st.success(f"Low Risk ✅ ({prob}%)")
+    # -------- ADVANCED --------
+    with advanced_tab:
+        col1, col2 = st.columns(2)
+
+        with col1:
+            age = st.number_input("Age ", key="b_age_a")
+            weight = st.number_input("Weight")
+            height = st.number_input("Height")
+
+        with col2:
+            systolic = st.number_input("Systolic BP ", key="b_sys")
+            diastolic = st.number_input("Diastolic BP ", key="b_dia")
+            salt = st.selectbox("Salt Intake", ["Low", "Medium", "High"])
+
+        if st.button("Predict (Advanced)", key="b_adv"):
+            pred, prob = fake_model([age, weight, height, systolic, diastolic])
+            st.success(f"Risk: {'High ⚠️' if pred else 'Low ✅'} ({prob}%)")
 
 # -------------------------------
-# RECOMMENDATION SECTION
+# RECOMMENDATIONS
 # -------------------------------
 st.write("---")
 st.markdown("## 💡 Health Recommendations")
@@ -136,8 +155,3 @@ with col2:
 
 with col3:
     st.info("🚭 Avoid smoking & alcohol")
-
-
-
-st.markdown("---")
-st.caption("© 2026 DMD Clinical Space")
