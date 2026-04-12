@@ -136,3 +136,8 @@ with col2:
 
 with col3:
     st.info("🚭 Avoid smoking & alcohol")
+
+
+
+st.markdown("---")
+st.caption("© 2026 DMD Clinical Space")
