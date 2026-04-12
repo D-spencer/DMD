@@ -21,7 +21,7 @@ st.write("---")
 # -------------------------------
 # DISEASE TABS
 # -------------------------------
-tab1, tab2, tab3 = st.tabs(["🩸 Diabetes", "❤️ Heart Disease", "💉 Hypertension"])
+tab1, tab2, tab3 , tab4 = st.tabs(["🩸 Diabetes", "❤️ Heart Disease", "💉 Hypertension", "Stroke"])
 
 # =========================================================
 # 🩸 DIABETES
@@ -29,7 +29,7 @@ tab1, tab2, tab3 = st.tabs(["🩸 Diabetes", "❤️ Heart Disease", "💉 Hyper
 with tab1:
     st.subheader("Diabetes Assessment")
 
-    basic_tab, advanced_tab = st.tabs(["Basic", "Advanced"])
+    basic_tab, advanced_tab = st.tabs(["Basic Prediction", "Advanced Prediction"])
 
     # -------- BASIC --------
     with basic_tab:
