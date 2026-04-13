@@ -4,7 +4,7 @@ import pickle
 
 st.set_page_config(page_title="DMD Clinical Space", layout="wide")
 
-with open("models/heart_basic_model_v1.pkl", "rb") as f:
+with open("models/heart_advance _model_v1.pkl", "rb") as f:
     heart_adv_model = pickle.load(f)
 
    # Chest pain mapping
