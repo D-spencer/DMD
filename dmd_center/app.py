@@ -134,29 +134,29 @@ with tab2:
     # -------------------------------
         if st.button("Predict (Advanced)"):
     
-        input_data = [[
-            age,
-            1 if sex == "Male" else 0,
-            cp_map[chest_pain],
-            resting_bp,
-            cholesterol,
-            fbs_map[fasting_bs],
-            ecg_map[resting_ecg],
-            max_hr,
-            angina_map[exercise_angina],
-            old_peak,
-            slope_map[st_slope]
-        ]]
-    
-        pred = heart_adv_model.predict(input_data)[0]
-        prob = heart_adv_model.predict_proba(input_data)[0][1]
-    
-        st.write("### Result")
-    
-        if pred == 1:
-            st.error(f"High Risk ⚠️ ({round(prob*100, 2)}%)")
-        else:
-            st.success(f"Low Risk ✅ ({round(prob*100, 2)}%)")
+            input_data = [[
+                age,
+                1 if sex == "Male" else 0,
+                cp_map[chest_pain],
+                resting_bp,
+                cholesterol,
+                fbs_map[fasting_bs],
+                ecg_map[resting_ecg],
+                max_hr,
+                angina_map[exercise_angina],
+                old_peak,
+                slope_map[st_slope]
+            ]]
+        
+            pred = heart_adv_model.predict(input_data)[0]
+            prob = heart_adv_model.predict_proba(input_data)[0][1]
+        
+            st.write("### Result")
+        
+            if pred == 1:
+                st.error(f"High Risk ⚠️ ({round(prob*100, 2)}%)")
+            else:
+                st.success(f"Low Risk ✅ ({round(prob*100, 2)}%)")
 
 # =========================================================
 # 💉 HYPERTENSION
