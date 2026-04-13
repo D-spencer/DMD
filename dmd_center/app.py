@@ -133,7 +133,7 @@ with tab2:
     
         with col1:
             age = st.number_input("Age", min_value=1, max_value=120)
-            sex = st.selectbox("Gender", ["Male", "Female"])
+            sex = st.selectbox("Gender", ["M", "F"])
     
             chest_pain = st.selectbox(
                 "Chest Pain Type",
