@@ -1,14 +1,18 @@
 import streamlit as st
 import numpy as np
 import pickle
+import joblib
 import os 
 
 st.set_page_config(page_title="DMD Clinical Space", layout="wide")
 
 BASE_PATH = "dmd_center/models/"
 
-with open(BASE_PATH + "heart_advance_model_v1.pkl", "rb") as f:
-    heart_adv_model = pickle.load(f)
+# with open(BASE_PATH + "heart_advance_model_v1.pkl", "rb") as f:
+#     heart_adv_model = pickle.load(f)
+
+
+heart_adv_model = joblib.load("dmd_center/models/heart_advance_model_v1.pkl")
 
 # with open(BASE_PATH + "diabetes_model.pkl", "rb") as f:
 #     diabetes_model = pickle.load(f)
