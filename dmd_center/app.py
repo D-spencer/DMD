@@ -1,11 +1,17 @@
 import streamlit as st
 import numpy as np
 import pickle
+import os 
 
 st.set_page_config(page_title="DMD Clinical Space", layout="wide")
 
-with open("models/heart_advance _model_v1.pkl", "rb") as f:
+BASE_PATH = "dmd_center/models/"
+
+with open(BASE_PATH + "heart_advance_model_v1.pkl", "rb") as f:
     heart_adv_model = pickle.load(f)
+
+# with open(BASE_PATH + "diabetes_model.pkl", "rb") as f:
+#     diabetes_model = pickle.load(f)
 
    # Chest pain mapping
 cp_map = {
