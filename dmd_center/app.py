@@ -184,15 +184,15 @@ with tab2:
                    "old_peak": old_peak,
                    "st_slope": slope_map[st_slope] }])
         
-            pred = heart_adv_model.predict(input_data)[0]
-            prob = heart_adv_model.predict_proba(input_data)[0][1]
-            
-            st.write("### Result")
-            
-            if pred == 1:
-                st.error(f"High Risk ⚠️ ({round(prob*100, 2)}%)")
-            else:
-                st.success(f"Low Risk ✅ ({round(prob*100, 2)}%)")
+         pred = heart_adv_model.predict(input_data)[0]
+         prob = heart_adv_model.predict_proba(input_data)[0][1]
+         
+         st.write("### Result")
+         
+         if pred == 1:
+             st.error(f"High Risk ⚠️ ({round(prob*100, 2)}%)")
+         else:
+             st.success(f"Low Risk ✅ ({round(prob*100, 2)}%)")
 
 # =========================================================
 # 💉 HYPERTENSION
