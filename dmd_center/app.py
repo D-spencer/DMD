@@ -173,17 +173,17 @@ with tab2:
     # -------------------------------
         if st.button("Predict (Advanced)"):
             input_data = pd.DataFrame([{
-    "age": int(age),
-    "sex": sex ,
-    "chestpaintype": str(cp_map[chest_pain]),
-    "restingbp": float(resting_bp),
-    "cholesterol": float(cholesterol),
-    "fastingbs": int(fbs_map[fasting_bs]),
-    "restingecg": str(ecg_map[resting_ecg]),
-    "max_hr": float(max_hr),
-    "exercise_angina": str(angina_map[exercise_angina]),
-    "old_peak": float(old_peak),
-    "st_slope": str(slope_map[st_slope])
+    "age": age,
+    "sex": sex,  # ✅ FIXED
+    "chestpaintype": cp_map[chest_pain],
+    "restingbp": resting_bp,
+    "cholesterol": cholesterol,
+    "fastingbs": fbs_map[fasting_bs],
+    "restingecg": ecg_map[resting_ecg],
+    "max_hr": max_hr,
+    "exercise_angina": angina_map[exercise_angina],
+    "old_peak": old_peak,
+    "st_slope": slope_map[st_slope]
 }])
             
             pred = heart_adv_model.predict(input_data)[0]
