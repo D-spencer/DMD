@@ -6,6 +6,40 @@ st.set_page_config(page_title="DMD Clinical Space", layout="wide")
 
 heart_adv_model = pickle.load(open("models/heart_advance_model_v1.pkl", "rb"))
 
+   # Chest pain mapping
+cp_map = {
+    "Mild Chest Pain (Angina Type)": "ATA",
+    "Non-Anginal Pain": "NAP",
+    "No Chest Pain (Asymptomatic)": "ASY",
+    "Typical Angina": "TA"
+}
+
+# Fasting blood sugar
+fbs_map = {
+    "No (Normal)": 0,
+    "Yes (High Blood Sugar)": 1
+}
+
+# Resting ECG
+ecg_map = {
+    "Normal Heart Rhythm": "Normal",
+    "Heart Muscle Thickening": "LVH",
+    "Abnormal ST Segment": "ST"
+}
+
+# Exercise angina
+angina_map = {
+    "No": "N",
+    "Yes (Pain During Exercise)": "Y"
+}
+
+# ST slope
+slope_map = {
+    "Upward (Normal)": "Up",
+    "Flat (Risky)": "Flat",
+    "Downward (Abnormal)": "Down"
+}
+
 
 def fake_model(data):
     return np.random.choice([0, 1]), np.random.randint(60, 95)
