@@ -174,7 +174,7 @@ with tab2:
         if st.button("Predict (Advanced)"):
             input_data = pd.DataFrame([{
     "age": int(age),
-    "sex": int(1 if sex == "Male" else 0),
+    "sex": sex ,
     "chestpaintype": str(cp_map[chest_pain]),
     "restingbp": float(resting_bp),
     "cholesterol": float(cholesterol),
