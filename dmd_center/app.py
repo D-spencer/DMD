@@ -86,39 +86,7 @@ with tab2:
             st.success(f"Risk: {'High ⚠️' if pred else 'Low ✅'} ({prob}%)")
 
     # -------- ADVANCED --------
-    # Chest pain mapping
-cp_map = {
-    "Mild Chest Pain (Angina Type)": "ATA",
-    "Non-Anginal Pain": "NAP",
-    "No Chest Pain (Asymptomatic)": "ASY",
-    "Typical Angina": "TA"
-}
-
-# Fasting blood sugar
-fbs_map = {
-    "No (Normal)": 0,
-    "Yes (High Blood Sugar)": 1
-}
-
-# Resting ECG
-ecg_map = {
-    "Normal Heart Rhythm": "Normal",
-    "Heart Muscle Thickening": "LVH",
-    "Abnormal ST Segment": "ST"
-}
-
-# Exercise angina
-angina_map = {
-    "No": "N",
-    "Yes (Pain During Exercise)": "Y"
-}
-
-# ST slope
-slope_map = {
-    "Upward (Normal)": "Up",
-    "Flat (Risky)": "Flat",
-    "Downward (Abnormal)": "Down"
-}
+ 
     with advanced_tab:
         st.write("### Advanced Heart Disease Assessment")
     
@@ -164,31 +132,31 @@ slope_map = {
     # -------------------------------
     # PREDICTION
     # -------------------------------
-    if st.button("Predict (Advanced)"):
-
-    input_data = [[
-        age,
-        1 if sex == "Male" else 0,
-        cp_map[chest_pain],
-        resting_bp,
-        cholesterol,
-        fbs_map[fasting_bs],
-        ecg_map[resting_ecg],
-        max_hr,
-        angina_map[exercise_angina],
-        old_peak,
-        slope_map[st_slope]
-    ]]
-
-    pred = heart_adv_model.predict(input_data)[0]
-    prob = heart_adv_model.predict_proba(input_data)[0][1]
-
-    st.write("### Result")
-
-    if pred == 1:
-        st.error(f"High Risk ⚠️ ({round(prob*100, 2)}%)")
-    else:
-        st.success(f"Low Risk ✅ ({round(prob*100, 2)}%)")
+        if st.button("Predict (Advanced)"):
+    
+        input_data = [[
+            age,
+            1 if sex == "Male" else 0,
+            cp_map[chest_pain],
+            resting_bp,
+            cholesterol,
+            fbs_map[fasting_bs],
+            ecg_map[resting_ecg],
+            max_hr,
+            angina_map[exercise_angina],
+            old_peak,
+            slope_map[st_slope]
+        ]]
+    
+        pred = heart_adv_model.predict(input_data)[0]
+        prob = heart_adv_model.predict_proba(input_data)[0][1]
+    
+        st.write("### Result")
+    
+        if pred == 1:
+            st.error(f"High Risk ⚠️ ({round(prob*100, 2)}%)")
+        else:
+            st.success(f"Low Risk ✅ ({round(prob*100, 2)}%)")
 
 # =========================================================
 # 💉 HYPERTENSION
