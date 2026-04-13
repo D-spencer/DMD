@@ -4,5 +4,6 @@ import numpy as np
 import pickle
 
 
-st.write(os.listdir())
-st.write(os.listdir("models"))
+st.write("BASE DIR:", BASE_DIR)
+st.write("FILES:", os.listdir(BASE_DIR))
+st.write("MODELS:", os.listdir(os.path.join(BASE_DIR, "models")))
