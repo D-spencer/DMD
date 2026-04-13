@@ -190,9 +190,9 @@ with tab2:
             st.write("### Result")
             
             if pred == 1:
-            st.error(f"High Risk ⚠️ ({round(prob*100, 2)}%)")
+               st.error(f"High Risk ⚠️ ({round(prob*100, 2)}%)")
             else:
-            st.success(f"Low Risk ✅ ({round(prob*100, 2)}%)")
+               st.success(f"Low Risk ✅ ({round(prob*100, 2)}%)")
 
 # =========================================================
 # 💉 HYPERTENSION
