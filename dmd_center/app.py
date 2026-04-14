@@ -1,14 +1,13 @@
 import streamlit as st
 import numpy as np
-import pickle
 import joblib
 import os 
 import pandas as pd
 
 st.set_page_config(page_title="DMD Clinical Space", layout="wide")
 
-
 heart_adv_model = joblib.load("dmd_center/models/heart_advance_model_v1.pkl")
+heart_basic_model = joblib.load("dmd_center/models/heart_basic_model_v1.pkl")
 
 
    # Chest pain mapping
@@ -116,13 +115,44 @@ with tab2:
 
     # -------- BASIC --------
     with basic_tab:
-        age = st.number_input("Age", key="h_age")
-        cholesterol = st.number_input("Cholesterol")
-        bp = st.number_input("Blood Pressure", key="h_bp")
+       col1, col2 = st.columns(2)
+
+       with col1:
+          age = st.number_input("Age", min_value=1, max_value=120 , key="h_age")
+          sex = st.selectbox("Gender", ["M", "F"])
+          chest_pain = st.selectbox(
+                "Chest Pain Type",
+                list(cp_map.keys())
+            )
+
+      with col2: 
+         resting_bp = st.number_input("Resting Blood Pressure (mmHg)")
+         cholesterol = st.number_input("Cholesterol Level")
+         exercise_angina = st.selectbox(
+                "Chest Pain During Exercise?",
+                list(angina_map.keys())
+            )
+         
 
         if st.button("Predict (Basic)", key="h_basic"):
-            pred, prob = fake_model([age, cholesterol, bp])
-            st.success(f"Risk: {'High ⚠️' if pred else 'Low ✅'} ({prob}%)")
+           input_data = pd.DataFrame([{
+    "age": age,
+    "sex": sex,  
+    "chestpaintype": cp_map[chest_pain],
+    "restingbp": resting_bp,
+    "cholesterol": cholesterol,
+    "exercise_angina": angina_map[exercise_angina]
+   
+}])
+            pred = heart_basic_model.predict(input_data)[0]
+            prob = heart_basic_model.predict_proba(input_data)[0][1]
+            
+            st.write("### Result")
+            
+            if pred == 1:
+               st.error(f"High Risk ⚠️ ({round(prob*100, 2)}%)")
+            else:
+               st.success(f"Low Risk ✅ ({round(prob*100, 2)}%)")
 
     # -------- ADVANCED --------
  
