@@ -163,26 +163,26 @@ with tab2:
         col1, col2 = st.columns(2)
     
         with col1:
-            age = st.number_input("Age", min_value=1, max_value=120)
-            sex = st.selectbox("Gender", ["M", "F"])
+            age = st.number_input("Age", min_value=1, max_value=120 , key="adv_age")
+            sex = st.selectbox("Gender", ["M", "F"] , key = "adv_gender")
     
             chest_pain = st.selectbox(
                 "Chest Pain Type",
-                list(cp_map.keys())
+                list(cp_map.keys()), key="adv_cp"
             )
     
-            resting_bp = st.number_input("Resting Blood Pressure (mmHg)")
-            cholesterol = st.number_input("Cholesterol Level")
+            resting_bp = st.number_input("Resting Blood Pressure (mmHg)", key="adv_rbp")
+            cholesterol = st.number_input("Cholesterol Level" , key="adv_cho")
     
         with col2:
             fasting_bs = st.selectbox(
                 "High Blood Sugar?",
-                list(fbs_map.keys())
+                list(fbs_map.keys()), key="adv_fbs"
             )
     
             resting_ecg = st.selectbox(
                 "Resting ECG Result",
-                list(ecg_map.keys())
+                list(ecg_map.keys()), key="adv_recg"
             )
     
             max_hr = st.number_input("Maximum Heart Rate")
