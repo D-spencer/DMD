@@ -143,13 +143,14 @@ with tab2:
            )
 
        if st.button("Predict (Basic)"):
-   
+         
            input_data = pd.DataFrame([{
                "age": age,
                "sex": sex ,  
                "chestpaintype": cp_map[chest_pain],
                "restingbp": resting_bp,
-               "cholesterol": cholesterol,
+               "cholesterol": np.nan if cholesterol is None else cholesterol,
+               st.caption("If you don't know your cholesterol, leave it unchecked — the system will estimate it.")
                "exercise_angina": angina_map[exercise_angina]
            }])
    
