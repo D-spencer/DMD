@@ -115,41 +115,46 @@ with tab2:
 
     # -------- BASIC --------
     with basic_tab:
-          col1, col2 = st.columns(2)
-          with col1:
-            age = st.number_input("Age", min_value=1, max_value=120 , key="h_age")
-            sex = st.selectbox("Gender", ["M", "F"])
-            chest_pain = st.selectbox(
+    col1, col2 = st.columns(2)
+
+    with col1:
+        age = st.number_input("Age", min_value=1, max_value=120, key="h_age")
+        sex = st.selectbox("Gender", ["M", "F"])
+
+        chest_pain = st.selectbox(
             "Chest Pain Type",
             list(cp_map.keys())
-            )
-          with col2: 
-            resting_bp = st.number_input("Resting Blood Pressure (mmHg)")
-            cholesterol = st.number_input("Cholesterol Level")
-            exercise_angina = st.selectbox(
+        )
+
+    with col2:
+        resting_bp = st.number_input("Resting Blood Pressure (mmHg)")
+        cholesterol = st.number_input("Cholesterol Level")
+
+        exercise_angina = st.selectbox(
             "Chest Pain During Exercise?",
             list(angina_map.keys())
-            )
-            
-   
-           if st.button("Predict (Basic)"):
-               input_data = pd.DataFrame([{
-               "age": age,
-               "sex": sex,  
-               "chestpaintype": cp_map[chest_pain],
-               "restingbp": resting_bp,
-               "cholesterol": cholesterol,
-               "exercise_angina": angina_map[exercise_angina]  }])
-               
-               pred = heart_basic_model.predict(input_data)[0]
-               prob = heart_basic_model.predict_proba(input_data)[0][1]
-               
-               st.write("### Result")
-               
-               if pred == 1:
-                  st.error(f"High Risk ⚠️ ({round(prob*100, 2)}%)")
-               else:
-                  st.success(f"Low Risk ✅ ({round(prob*100, 2)}%)")
+        )
+
+    if st.button("Predict (Basic)"):
+
+        input_data = pd.DataFrame([{
+            "age": age,
+            "sex": 1 if sex == "M" else 0,  # ✅ FIX
+            "chestpaintype": cp_map[chest_pain],
+            "restingbp": resting_bp,
+            "cholesterol": cholesterol,
+            "exercise_angina": angina_map[exercise_angina]
+        }])
+
+        pred = heart_basic_model.predict(input_data)[0]
+        prob = heart_basic_model.predict_proba(input_data)[0][1]
+
+        st.write("### Result")
+
+        if pred == 1:
+            st.error(f"High Risk ⚠️ ({round(prob*100, 2)}%)")
+        else:
+            st.success(f"Low Risk ✅ ({round(prob*100, 2)}%)")
 
     # -------- ADVANCED --------
  
