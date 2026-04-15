@@ -137,6 +137,7 @@ with tab2:
                key="basic_ch" )
             
            else:
+               st.info("We'll estimate your cholesterol using medical averages.")
                cholesterol = None  # ✅ This triggers imputer
    
            exercise_angina = st.selectbox(
