@@ -133,14 +133,14 @@ with tab2:
             
    
            if st.button("Predict (Basic)", key="h_basic"):
-                 input_data = pd.DataFrame([{
-             "age": age,
-             "sex": sex,  
-             "chestpaintype": cp_map[chest_pain],
-             "restingbp": resting_bp,
-             "cholesterol": cholesterol,
-             "exercise_angina": angina_map[exercise_angina]  }])
-              
+               input_data = pd.DataFrame([{
+               "age": age,
+               "sex": sex,  
+               "chestpaintype": cp_map[chest_pain],
+               "restingbp": resting_bp,
+               "cholesterol": cholesterol,
+               "exercise_angina": angina_map[exercise_angina]  }])
+               
                pred = heart_basic_model.predict(input_data)[0]
                prob = heart_basic_model.predict_proba(input_data)[0][1]
                
