@@ -139,7 +139,7 @@ with tab2:
    
            input_data = pd.DataFrame([{
                "age": age,
-               "sex": 1 if sex == "M" else 0,  # ✅ FIX
+               "sex": sex ,  
                "chestpaintype": cp_map[chest_pain],
                "restingbp": resting_bp,
                "cholesterol": cholesterol,
