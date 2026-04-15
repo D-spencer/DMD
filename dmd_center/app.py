@@ -127,7 +127,7 @@ with tab2:
            )
 
        with col2:
-           resting_bp = st.number_input("Resting Blood Pressure (mmHg)", key="basic_rbp")
+           resting_bp = st.number_input("Resting Blood Pressure (Systolic, mmHg e.g.120 from 120/80)", key="basic_rbp")
            use_chol = st.checkbox("I know my cholesterol level" , value = True)
            st.caption("If you don't know your cholesterol, leave it unchecked — the system will estimate it.")
 
