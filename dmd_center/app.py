@@ -150,7 +150,7 @@ with tab2:
                "chestpaintype": cp_map[chest_pain],
                "restingbp": resting_bp,
                "cholesterol": np.nan if cholesterol is None else cholesterol,
-               st.caption("If you don't know your cholesterol, leave it unchecked — the system will estimate it.")
+               
                "exercise_angina": angina_map[exercise_angina]
            }])
    
