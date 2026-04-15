@@ -131,12 +131,11 @@ with tab2:
            use_chol = st.checkbox("I know my cholesterol level")
 
           if use_chol:
-              cholesterol = st.number_input(
+                cholesterol = st.number_input(
                   "Cholesterol Level",
-                  key="basic_ch"
-              )
+                  key="basic_ch" )
           else:
-              cholesterol = None  # ✅ This triggers imputer
+                 cholesterol = None  # ✅ This triggers imputer
    
            exercise_angina = st.selectbox(
                "Chest Pain During Exercise?",
