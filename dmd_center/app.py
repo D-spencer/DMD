@@ -118,21 +118,21 @@ with tab2:
        col1, col2 = st.columns(2)
 
        with col1:
-           age = st.number_input("Age", min_value=1, max_value=120, key="h_age")
-           sex = st.selectbox("Gender", ["M", "F"])
+           age = st.number_input("Age", min_value=1, max_value=120, key="basic_age")
+           sex = st.selectbox("Gender", ["M", "F"], key="basic_gender")
    
            chest_pain = st.selectbox(
                "Chest Pain Type",
-               list(cp_map.keys())
+               list(cp_map.keys()), key="basic_cp"
            )
 
        with col2:
-           resting_bp = st.number_input("Resting Blood Pressure (mmHg)")
-           cholesterol = st.number_input("Cholesterol Level")
+           resting_bp = st.number_input("Resting Blood Pressure (mmHg)", key="basic_rbp")
+           cholesterol = st.number_input("Cholesterol Level", key="basic_ch")
    
            exercise_angina = st.selectbox(
                "Chest Pain During Exercise?",
-               list(angina_map.keys())
+               list(angina_map.keys()), key= "basic_ea"
            )
 
        if st.button("Predict (Basic)"):
