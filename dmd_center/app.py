@@ -129,11 +129,13 @@ with tab2:
        with col2:
            resting_bp = st.number_input("Resting Blood Pressure (mmHg)", key="basic_rbp")
            use_chol = st.checkbox("I know my cholesterol level")
+           st.caption("If you don't know your cholesterol, leave it unchecked — the system will estimate it.")
 
            if use_chol:
                cholesterol = st.number_input(
                "Cholesterol Level",
                key="basic_ch" )
+            
            else:
                cholesterol = None  # ✅ This triggers imputer
    
