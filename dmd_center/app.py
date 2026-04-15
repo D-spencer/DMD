@@ -133,7 +133,7 @@ with tab2:
             
    
            if st.button("Predict (Basic)", key="h_basic"):
-              input_data = pd.DataFrame([{
+                 input_data = pd.DataFrame([{
              "age": age,
              "sex": sex,  
              "chestpaintype": cp_map[chest_pain],
