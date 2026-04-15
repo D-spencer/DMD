@@ -128,7 +128,15 @@ with tab2:
 
        with col2:
            resting_bp = st.number_input("Resting Blood Pressure (mmHg)", key="basic_rbp")
-           cholesterol = st.number_input("Cholesterol Level", key="basic_ch")
+           use_chol = st.checkbox("I know my cholesterol level")
+
+          if use_chol:
+              cholesterol = st.number_input(
+                  "Cholesterol Level",
+                  key="basic_ch"
+              )
+          else:
+              cholesterol = None  # ✅ This triggers imputer
    
            exercise_angina = st.selectbox(
                "Chest Pain During Exercise?",
