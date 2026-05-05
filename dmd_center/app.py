@@ -349,22 +349,86 @@ with tab3:
                 st.success(f"Low Risk ✅ ({round(prob*100, 2)}%)")
 
     # -------- ADVANCED --------
-    # with advanced_tab:
-    #     col1, col2 = st.columns(2)
+    with advanced_tab:
 
-    #     with col1:
-    #         age = st.number_input("Age ", key="b_age_a")
-    #         weight = st.number_input("Weight")
-    #         height = st.number_input("Height")
-
-    #     with col2:
-    #         systolic = st.number_input("Systolic BP ", key="b_sys")
-    #         diastolic = st.number_input("Diastolic BP ", key="b_dia")
-    #         salt = st.selectbox("Salt Intake", ["Low", "Medium", "High"])
-
-    #     if st.button("Predict (Advanced)", key="b_adv"):
-    #         pred, prob = fake_model([age, weight, height, systolic, diastolic])
-    #         st.success(f"Risk: {'High ⚠️' if pred else 'Low ✅'} ({prob}%)")
+        col1, col2 = st.columns(2)
+    
+        with col1:
+            age = st.number_input("Age", min_value=1, max_value=120, key="a_age")
+    
+            gender = st.selectbox(
+                "Gender",
+                ["M", "F"],
+                key="a_gender"
+            )
+    
+            height = st.number_input("Height (cm)", key="a_height")
+    
+            ap_hi = st.number_input(
+                "Systolic BP (Top number)",
+                key="a_sys"
+            )
+    
+        with col2:
+            ap_lo = st.number_input(
+                "Diastolic BP (Bottom number)",
+                key="a_dia"
+            )
+    
+            smoke = st.selectbox(
+                "Do you smoke?",
+                [0, 1],
+                format_func=lambda x: "Yes" if x == 1 else "No",
+                key="a_smoke"
+            )
+    
+            alco = st.selectbox(
+                "Do you consume alcohol?",
+                [0, 1],
+                format_func=lambda x: "Yes" if x == 1 else "No",
+                key="a_alco"
+            )
+    
+            active = st.selectbox(
+                "Are you physically active?",
+                [0, 1],
+                format_func=lambda x: "Yes" if x == 1 else "No",
+                key="a_active"
+            )
+    
+        # 🔥 Prediction
+        if st.button("Predict (Advanced)", key="b_adv"):
+    
+            input_data = pd.DataFrame([{
+                "age": age,
+                "gender":  gender,
+                "height": height,
+                "ap_hi": ap_hi,
+                "ap_lo": ap_lo,
+                "smoke": smoke,
+                "alco": alco,
+                "active": active
+            }])
+    
+            pred = hyper_adv_model.predict(input_data)[0]
+            probs = hyper_adv_model.predict_proba(input_data)[0]
+    
+            # 🧠 Class mapping
+            stage_map = {
+                0: "Normal ✅",
+                1: "Elevated ⚠️",
+                2: "Hypertension Stage 1 ⚠️",
+                3: "Hypertension Stage 2 🚨"
+            }
+    
+            st.write("### Result")
+    
+            st.success(f"Prediction: {stage_map[pred]}")
+    
+            # 🔥 Show probabilities
+            st.write("### Confidence Breakdown")
+            for i, p in enumerate(probs):
+                st.write(f"{stage_map[i]}: {round(p*100, 2)}%")
 
 # -------------------------------
 # RECOMMENDATIONS
