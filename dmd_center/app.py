@@ -6,6 +6,7 @@ import pandas as pd
 
 st.set_page_config(page_title="DMD Clinical Space", layout="wide")
 
+### this class is for basic hypertension, because it was bringing an error , so i had to do this 
 class ThresholdClassifier: 
     def __init__(self , model,  threshold):
         self.model = model 
