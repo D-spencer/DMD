@@ -8,8 +8,8 @@ st.set_page_config(page_title="DMD Clinical Space", layout="wide")
 
 heart_adv_model = joblib.load("dmd_center/models/heart_advance_model_v1.pkl")
 heart_basic_model = joblib.load("dmd_center/models/heart_basic_model_v1.pkl")
-# hyper_adv_model = joblib.load("dmd_center/models/hyper_adv_model_v1.pkl")
-# hyper_basic_model = joblib.load("dmd_center/models/hyper_basic_model_v1.pkl")
+hyper_adv_model = joblib.load("dmd_center/models/hyper_adv_model_v1.pkl")
+hyper_basic_model = joblib.load("dmd_center/models/hyper_basic_model_v1.pkl")
 
 
    # Chest pain mapping
