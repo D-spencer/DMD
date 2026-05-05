@@ -413,7 +413,6 @@ with tab3:
 
             with st.spinner("Analyzing patient data... 🧠"):
                 time.sleep(1.5)
-                st.success("Prediction complete ✅")
     
                 pred = hyper_adv_model.predict(input_data)[0]
                 probs = hyper_adv_model.predict_proba(input_data)[0]
