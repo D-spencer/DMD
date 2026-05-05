@@ -3,6 +3,7 @@ import numpy as np
 import joblib
 import os 
 import pandas as pd
+import time 
 
 st.set_page_config(page_title="DMD Clinical Space", layout="wide")
 
@@ -409,26 +410,30 @@ with tab3:
                 "alco": alco,
                 "active": active
             }])
+
+            with st.spinner("Analyzing patient data... 🧠"):
+                time.sleep(1.5)
+                st.success("Prediction complete ✅")
     
-            pred = hyper_adv_model.predict(input_data)[0]
-            probs = hyper_adv_model.predict_proba(input_data)[0]
-    
-            #  Class mapping
-            stage_map = {
-                3: "Normal ✅",
-                0: "Elevated ⚠️",
-                1: "Hypertension Stage 1 ⚠️",
-                2: "Hypertension Stage 2 🚨"
-            }
-    
-            st.write("### Result")
-    
-            st.success(f"Prediction: {stage_map[pred]}")
-    
-            #  Show probabilities
-            st.write("### Confidence Breakdown")
-            for i, p in enumerate(probs):
-                st.write(f"{stage_map[i]}: {round(p*100, 2)}%")
+                pred = hyper_adv_model.predict(input_data)[0]
+                probs = hyper_adv_model.predict_proba(input_data)[0]
+        
+                #  Class mapping
+                stage_map = {
+                    3: "Normal ✅",
+                    0: "Elevated ⚠️",
+                    1: "Hypertension Stage 1 ⚠️",
+                    2: "Hypertension Stage 2 🚨"
+                }
+        
+                st.write("### Result")
+        
+                st.success(f"Prediction: {stage_map[pred]}")
+        
+                #  Show probabilities
+                st.write("### Confidence Breakdown")
+                for i, p in enumerate(probs):
+                    st.write(f"{stage_map[i]}: {round(p*100, 2)}%")
 
 # -------------------------------
 # RECOMMENDATIONS
