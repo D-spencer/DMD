@@ -349,22 +349,22 @@ with tab3:
             st.success(f"Low Risk ✅ ({round(prob*100, 2)}%)")
 
     # -------- ADVANCED --------
-    with advanced_tab:
-        col1, col2 = st.columns(2)
+    # with advanced_tab:
+    #     col1, col2 = st.columns(2)
 
-        with col1:
-            age = st.number_input("Age ", key="b_age_a")
-            weight = st.number_input("Weight")
-            height = st.number_input("Height")
+    #     with col1:
+    #         age = st.number_input("Age ", key="b_age_a")
+    #         weight = st.number_input("Weight")
+    #         height = st.number_input("Height")
 
-        with col2:
-            systolic = st.number_input("Systolic BP ", key="b_sys")
-            diastolic = st.number_input("Diastolic BP ", key="b_dia")
-            salt = st.selectbox("Salt Intake", ["Low", "Medium", "High"])
+    #     with col2:
+    #         systolic = st.number_input("Systolic BP ", key="b_sys")
+    #         diastolic = st.number_input("Diastolic BP ", key="b_dia")
+    #         salt = st.selectbox("Salt Intake", ["Low", "Medium", "High"])
 
-        if st.button("Predict (Advanced)", key="b_adv"):
-            pred, prob = fake_model([age, weight, height, systolic, diastolic])
-            st.success(f"Risk: {'High ⚠️' if pred else 'Low ✅'} ({prob}%)")
+    #     if st.button("Predict (Advanced)", key="b_adv"):
+    #         pred, prob = fake_model([age, weight, height, systolic, diastolic])
+    #         st.success(f"Risk: {'High ⚠️' if pred else 'Low ✅'} ({prob}%)")
 
 # -------------------------------
 # RECOMMENDATIONS
