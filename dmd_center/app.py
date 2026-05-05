@@ -161,7 +161,7 @@ with tab2:
                list(angina_map.keys()), key= "basic_ea"
            )
 
-       if st.button("Run Diagnosis 🩺"):
+       if st.button("Run Diagnosis 🩺", key ='heart_basic'):
          
            input_data = pd.DataFrame([{
                "age": age,
@@ -231,7 +231,7 @@ with tab2:
     # -------------------------------
     # PREDICTION
     # -------------------------------
-        if st.button("Run Diagnosis 🩺"):
+        if st.button("Run Diagnosis 🩺" , key = 'heart_adv'):
             input_data = pd.DataFrame([{
     "age": age,
     "sex": sex,  # ✅ FIXED
@@ -327,7 +327,7 @@ with tab3:
     # =======================================
         #  Prediction
     #========================================
-        if st.button("Run Diagnosis 🩺", key="b_basic"):
+        if st.button("Run Diagnosis 🩺", key="hyper_basic"):
     
             input_data = pd.DataFrame([{
                 "age": age,
@@ -403,7 +403,7 @@ with tab3:
             )
     
         #  Prediction
-        if st.button("Run Diagnosis 🩺", key="b_adv"):
+        if st.button("Run Diagnosis 🩺", key="hyper_adv"):
     
             input_data = pd.DataFrame([{
                 "age": age,
