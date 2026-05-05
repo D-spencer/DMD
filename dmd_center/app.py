@@ -6,6 +6,18 @@ import pandas as pd
 
 st.set_page_config(page_title="DMD Clinical Space", layout="wide")
 
+class ThresholdClassifier: 
+    def __init__(self , model,  threshold):
+        self.model = model 
+        self.threshold = threshold
+
+    def predict(self ,  x):
+        proba = self.model.predict_proba(x)[:,1]
+        return (proba >= self.threshold).astype(int)
+    
+    def predict_proba(self , x):
+        return self.model.predict_proba(x)
+
 heart_adv_model = joblib.load("dmd_center/models/heart_advance_model_v1.pkl")
 heart_basic_model = joblib.load("dmd_center/models/heart_basic_model_v1.pkl")
 hyper_adv_model = joblib.load("dmd_center/models/hyper_adv_model_v1.pkl")
