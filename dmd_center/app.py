@@ -314,39 +314,39 @@ with tab3:
                 key="b_active"
             )
     
-    #  Auto BMI calculation
-    if height > 0:
-        bmi = weight / ((height / 100) ** 2)
-        st.info(f"Calculated BMI: {round(bmi, 2)}")
-    else:
-        bmi = 0
-# =======================================
-    #  Prediction
-    #===================================
-    if st.button("Predict (Basic)", key="b_basic"):
-
-        input_data = pd.DataFrame([{
-            "age": age,
-            "gender": gender,
-            "height": height,
-            "weight": weight,
-            "bmi": bmi,
-            "cholesterol": cholesterol,
-            "gluc": gluc,
-            "smoke": smoke,
-            "alco": alco,
-            "active": active
-        }])
-
-        pred = hyper_basic_model.predict(input_data)[0]
-        prob = hyper_basic_model.predict_proba(input_data)[0][1]
-
-        st.write("### Result")
-
-        if pred == 1:
-            st.error(f"High Risk ⚠️ ({round(prob*100, 2)}%)")
+        #  Auto BMI calculation
+        if height > 0:
+            bmi = weight / ((height / 100) ** 2)
+            st.info(f"Calculated BMI: {round(bmi, 2)}")
         else:
-            st.success(f"Low Risk ✅ ({round(prob*100, 2)}%)")
+            bmi = 0
+    # =======================================
+        #  Prediction
+        #===================================
+        if st.button("Predict (Basic)", key="b_basic"):
+    
+            input_data = pd.DataFrame([{
+                "age": age,
+                "gender": gender,
+                "height": height,
+                "weight": weight,
+                "bmi": bmi,
+                "cholesterol": cholesterol,
+                "gluc": gluc,
+                "smoke": smoke,
+                "alco": alco,
+                "active": active
+            }])
+    
+            pred = hyper_basic_model.predict(input_data)[0]
+            prob = hyper_basic_model.predict_proba(input_data)[0][1]
+    
+            st.write("### Result")
+    
+            if pred == 1:
+                st.error(f"High Risk ⚠️ ({round(prob*100, 2)}%)")
+            else:
+                st.success(f"Low Risk ✅ ({round(prob*100, 2)}%)")
 
     # -------- ADVANCED --------
     # with advanced_tab:
