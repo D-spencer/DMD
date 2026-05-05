@@ -266,67 +266,68 @@ with tab3:
 
         col1, col2 = st.columns(2)
 
-    with col1:
-        age = st.number_input("Age", min_value=1, max_value=120, key="b_age")
-
-        gender = st.selectbox(
-            "Gender",
-            ["M", "F"],
-            key="b_gender"
-        )
-
-        height = st.number_input("Height (cm)", key="b_height")
-        weight = st.number_input("Weight (kg)", key="b_weight")
-
-    with col2:
-        cholesterol = st.selectbox(
-            "Cholesterol Level",
-            [1, 2, 3],
-            format_func=lambda x: ["Normal", "Above Normal", "Well Above Normal"][x-1],
-            key="b_chol"
-        )
-
-        gluc = st.selectbox(
-            "Glucose Level",
-            [1, 2, 3],
-            format_func=lambda x: ["Normal", "Above Normal", "Well Above Normal"][x-1],
-            key="b_gluc"
-        )
-
-        smoke = st.selectbox(
-            "Do you smoke?",
-            [0, 1],
-            format_func=lambda x: "Yes" if x == 1 else "No",
-            key="b_smoke"
-        )
-
-        alco = st.selectbox(
-            "Do you consume alcohol?",
-            [0, 1],
-            format_func=lambda x: "Yes" if x == 1 else "No",
-            key="b_alco"
-        )
-
-        active = st.selectbox(
-            "Are you physically active?",
-            [0, 1],
-            format_func=lambda x: "Yes" if x == 1 else "No",
-            key="b_active"
-        )
-
+        with col1:
+            age = st.number_input("Age", min_value=1, max_value=120, key="b_age")
+    
+            gender = st.selectbox(
+                "Gender",
+                ["M", "F"],
+                key="b_gender"
+            )
+    
+            height = st.number_input("Height (cm)", key="b_height")
+            weight = st.number_input("Weight (kg)", key="b_weight")
+    
+        with col2:
+            cholesterol = st.selectbox(
+                "Cholesterol Level",
+                [1, 2, 3],
+                format_func=lambda x: ["Normal", "Above Normal", "Well Above Normal"][x-1],
+                key="b_chol"
+            )
+    
+            gluc = st.selectbox(
+                "Glucose Level",
+                [1, 2, 3],
+                format_func=lambda x: ["Normal", "Above Normal", "Well Above Normal"][x-1],
+                key="b_gluc"
+            )
+    
+            smoke = st.selectbox(
+                "Do you smoke?",
+                [0, 1],
+                format_func=lambda x: "Yes" if x == 1 else "No",
+                key="b_smoke"
+            )
+    
+            alco = st.selectbox(
+                "Do you consume alcohol?",
+                [0, 1],
+                format_func=lambda x: "Yes" if x == 1 else "No",
+                key="b_alco"
+            )
+    
+            active = st.selectbox(
+                "Are you physically active?",
+                [0, 1],
+                format_func=lambda x: "Yes" if x == 1 else "No",
+                key="b_active"
+            )
+    
     #  Auto BMI calculation
     if height > 0:
         bmi = weight / ((height / 100) ** 2)
         st.info(f"Calculated BMI: {round(bmi, 2)}")
     else:
         bmi = 0
-
-    # 🔥 Prediction
+# =======================================
+    #  Prediction
+    #===================================
     if st.button("Predict (Basic)", key="b_basic"):
 
         input_data = pd.DataFrame([{
             "age": age,
-            "gender": 1 if gender == "M" else 0,
+            "gender": gender,
             "height": height,
             "weight": weight,
             "bmi": bmi,
