@@ -424,10 +424,10 @@ with tab3:
         
                 #  Class mapping
                 stage_map = {
-                    3: "Normal ✅",
-                    0: "Elevated ⚠️",
-                    1: "Hypertension Stage 1 ⚠️",
-                    2: "Hypertension Stage 2 🚨"
+                    0: "Normal ✅",
+                    1: "Elevated ⚠️",
+                    2: "Hypertension Stage 1 ⚠️",
+                    3: "Hypertension Stage 2 🚨"
                 }
         
                 st.write("### Result")
