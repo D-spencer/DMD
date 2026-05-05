@@ -172,16 +172,18 @@ with tab2:
                
                "exercise_angina": angina_map[exercise_angina]
            }])
+           with st.spinner("Analyzing patient data... 🧠"):
+                time.sleep(1.5)
    
-           pred = heart_basic_model.predict(input_data)[0]
-           prob = heart_basic_model.predict_proba(input_data)[0][1]
-   
-           st.write("### Result")
-   
-           if pred == 1:
-               st.error(f"High Risk ⚠️ ({round(prob*100, 2)}%)")
-           else:
-               st.success(f"Low Risk ✅ ({round(prob*100, 2)}%)")
+                pred = heart_basic_model.predict(input_data)[0]
+                prob = heart_basic_model.predict_proba(input_data)[0][1]
+       
+                st.write("### Result")
+       
+                if pred == 1:
+                    st.error(f"High Risk ⚠️ ({round(prob*100, 2)}%)")
+                else:
+                    st.success(f"Low Risk ✅ ({round(prob*100, 2)}%)")
     # -------- ADVANCED --------
  
     with advanced_tab:
@@ -243,16 +245,17 @@ with tab2:
     "old_peak": old_peak,
     "st_slope": slope_map[st_slope]
 }])
-            
-            pred = heart_adv_model.predict(input_data)[0]
-            prob = heart_adv_model.predict_proba(input_data)[0][1]
-            
-            st.write("### Result")
-            
-            if pred == 1:
-               st.error(f"High Risk ⚠️ ({round(prob*100, 2)}%)")
-            else:
-               st.success(f"Low Risk ✅ ({round(prob*100, 2)}%)")
+            with st.spinner("Analyzing patient data... 🧠"):
+                time.sleep(1.5)
+                pred = heart_adv_model.predict(input_data)[0]
+                prob = heart_adv_model.predict_proba(input_data)[0][1]
+                
+                st.write("### Result")
+                
+                if pred == 1:
+                   st.error(f"High Risk ⚠️ ({round(prob*100, 2)}%)")
+                else:
+                   st.success(f"Low Risk ✅ ({round(prob*100, 2)}%)")
 
 # =========================================================
 # 💉 HYPERTENSION
@@ -323,7 +326,7 @@ with tab3:
             bmi = 0
     # =======================================
         #  Prediction
-        #===================================
+    #========================================
         if st.button("Predict (Basic)", key="b_basic"):
     
             input_data = pd.DataFrame([{
@@ -338,16 +341,18 @@ with tab3:
                 "alco": alco,
                 "active": active
             }])
+            with st.spinner("Analyzing patient data... 🧠"):
+                time.sleep(1.5)
     
-            pred = hyper_basic_model.predict(input_data)[0]
-            prob = hyper_basic_model.predict_proba(input_data)[0][1]
-    
-            st.write("### Result")
-    
-            if pred == 1:
-                st.error(f"High Risk ⚠️ ({round(prob*100, 2)}%)")
-            else:
-                st.success(f"Low Risk ✅ ({round(prob*100, 2)}%)")
+                pred = hyper_basic_model.predict(input_data)[0]
+                prob = hyper_basic_model.predict_proba(input_data)[0][1]
+        
+                st.write("### Result")
+        
+                if pred == 1:
+                    st.error(f"High Risk ⚠️ ({round(prob*100, 2)}%)")
+                else:
+                    st.success(f"Low Risk ✅ ({round(prob*100, 2)}%)")
 
     # -------- ADVANCED --------
     with advanced_tab:
