@@ -262,9 +262,9 @@ with tab3:
     basic_tab, advanced_tab = st.tabs(["Basic", "Advanced"])
 
     # -------- BASIC --------
-   with basic_tab:
+    with basic_tab:
 
-    col1, col2 = st.columns(2)
+        col1, col2 = st.columns(2)
 
     with col1:
         age = st.number_input("Age", min_value=1, max_value=120, key="b_age")
