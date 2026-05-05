@@ -396,7 +396,7 @@ with tab3:
                 key="a_active"
             )
     
-        # 🔥 Prediction
+        #  Prediction
         if st.button("Predict (Advanced)", key="b_adv"):
     
             input_data = pd.DataFrame([{
@@ -413,7 +413,7 @@ with tab3:
             pred = hyper_adv_model.predict(input_data)[0]
             probs = hyper_adv_model.predict_proba(input_data)[0]
     
-            # 🧠 Class mapping
+            #  Class mapping
             stage_map = {
                 0: "Normal ✅",
                 1: "Elevated ⚠️",
@@ -425,7 +425,7 @@ with tab3:
     
             st.success(f"Prediction: {stage_map[pred]}")
     
-            # 🔥 Show probabilities
+            #  Show probabilities
             st.write("### Confidence Breakdown")
             for i, p in enumerate(probs):
                 st.write(f"{stage_map[i]}: {round(p*100, 2)}%")
